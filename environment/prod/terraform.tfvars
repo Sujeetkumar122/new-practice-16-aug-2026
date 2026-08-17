@@ -5,7 +5,7 @@ resource_groups = {
   }
 
 
-  rg1 = {
+  rg2 = {
     name     = "prod-rg1"
     location = "Central India"
   }
