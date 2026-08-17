@@ -4,3 +4,10 @@ resource_groups = {
     location = "Central India"
   }
 }
+
+resource_groups = {
+  rg1 = {
+    name     = "prod-rg1"
+    location = "Central India"
+  }
+}
