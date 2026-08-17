@@ -32,30 +32,35 @@ jobs:
 
     steps:
 
-      # Checkout GitHub repository
+      # 1. Checkout repository
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Install Terraform
+      # 2. Setup Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Login to Azure using GitHub OIDC
+      # 3. Login to Azure using OIDC
       - name: Azure Login
         uses: azure/login@v2
         with:
           client-id: 31efd5f3-590c-4ed3-9796-e021d7905ae8
           tenant-id: ced5781c-1212-48f2-8dde-57e09383d9ee
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
 
-      # Initialize Terraform
+      # 4. Verify Azure Login
+      - name: Verify Azure Account
+        run: az account show
+
+      # 5. Terraform Init
       - name: Terraform Init
         run: terraform init
 
-      # Validate Terraform configuration
+      # 6. Terraform Validate
       - name: Terraform Validate
         run: terraform validate
 
-      # Generate Terraform execution plan
+      # 7. Terraform Plan
       - name: Terraform Plan
         run: terraform plan
